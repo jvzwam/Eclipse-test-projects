@@ -15,6 +15,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import swing2swt.layout.BoxLayout;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormAttachment;
 
 public class MainWindow extends ApplicationWindow {
 	private Text txtTypeHere;
@@ -37,24 +43,34 @@ public class MainWindow extends ApplicationWindow {
 	@Override
 	protected Control createContents(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
+		container.setLayout(new FormLayout());
 		
 		txtTypeHere = new Text(container, SWT.BORDER);
+		FormData fd_txtTypeHere = new FormData();
+		txtTypeHere.setLayoutData(fd_txtTypeHere);
 		txtTypeHere.setText("Type here");
-		txtTypeHere.setBounds(101, 21, 76, 21);
-		
-		Label lblNewLabel = new Label(container, SWT.NONE);
-		lblNewLabel.setBounds(40, 24, 55, 15);
-		lblNewLabel.setText("Text field");
 		
 		Button btnOk = new Button(container, SWT.NONE);
+		fd_txtTypeHere.left = new FormAttachment(btnOk, 0, SWT.LEFT);
+		FormData fd_btnOk = new FormData();
+		fd_btnOk.top = new FormAttachment(0, 30);
+		fd_btnOk.left = new FormAttachment(0, 65);
+		btnOk.setLayoutData(fd_btnOk);
 		btnOk.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				txtTypeHere.setText("");
 			}
 		});
-		btnOk.setBounds(102, 52, 75, 25);
 		btnOk.setText("Clear text");
+		
+		Label lblNewLabel = new Label(container, SWT.NONE);
+		fd_txtTypeHere.top = new FormAttachment(lblNewLabel, -3, SWT.TOP);
+		FormData fd_lblNewLabel = new FormData();
+		fd_lblNewLabel.top = new FormAttachment(0, 3);
+		fd_lblNewLabel.left = new FormAttachment(0, 10);
+		lblNewLabel.setLayoutData(fd_lblNewLabel);
+		lblNewLabel.setText("Text field");
 
 		return container;
 	}
