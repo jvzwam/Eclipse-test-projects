@@ -1,2 +1,0 @@
-Eclipse-test-projects
-=====================
